@@ -24,18 +24,22 @@ vector<int> solution(vector<vector<int> > v) {
     int cx = v[2][0];
     int cy = v[2][1];
     
-    int dab = (ax-bx)*(ax-bx) + (ay-by) * (ay-by) ;
-    int dbc = (cx-bx)*(cx-bx) + (cy-by) * (cy-by) ;
-    int dca = (ax-cx)*(ax-cx) + (ay-cy) * (ay-cy) ;
-    
-    int maximum = max((max(dab, dbc)), dca);
-    if(maximum == dab) {
-        return {ax+bx-cx, ay+by-cy};
-    } else if (maximum == dbc) {
-        return {bx+cx-ax, by+cy-ay};
-    } else {
-        return {ax+cx-bx, ay+by-by};
+    if(ax == bx){
+        ans.push_back(cx);
+    }else if(bx == cx) {
+        ans.push_back(ax);
+    }else {
+        ans.push_back(bx);
     }
+    
+    if(ay == by){
+        ans.push_back(cy);
+    }else if(by == cy) {
+        ans.push_back(ay);
+    }else {
+        ans.push_back(by);
+    }
+    return ans;
 }
 
 
