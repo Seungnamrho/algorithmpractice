@@ -8,31 +8,30 @@
 
 #include <iostream>
 #include <vector>
+#include <stack>
 using namespace std;
-
-vector<long> slice(const vector<long>& v, int a, int b) {
-    return vector<long>(v.begin() + a, v.begin() + b);
-}
-
-void printPostOrder(const vector<long>& preorder, const vector<long>& inorder) {
-    const long N = preorder.size();
-    if(preorder.empty()) {
-        return;
-    }
-    const int root = preorder[0];
-    const long L = find(inorder.begin(), inorder.end(), root) - inorder.begin();
-    const int R = N - L - 1;
-    printPostOrder(slice(preorder, 1, L+1), slice(inorder, 0, L));
-    printPostOrder(slice(preorder, L+1, N), slice(inorder, L+1, N));
-    cout << root <<' ';
-}
 
 
 int main(int argc, const char* argv[]) {
-    vector<long> pre = {27, 16, 9, 12, 54, 36, 72};
-    vector<long> in = {9, 12, 16, 27, 36, 54, 762};
-    printPostOrder(pre, in);
-
+    int N;
+    cin >> N;
+    vector<int> arr;
+    stack<int> int_stack;
+    int res = 0;
+    while(N != 0) {
+        int temp = N % 10;
+        int_stack.push(temp);
+        N /= 10;
+    }
+    while(!int_stack.empty()) {
+        int temp = int_stack.top();
+        arr.push_back(temp);
+        int_stack.pop();
+    }
+    for(int i=0; i<arr.size(); i++) {
+        res += arr[i];
+    }
+    cout << res;
 }
 
 
