@@ -8,48 +8,42 @@
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include <array>
 #include <math.h>
 
 using namespace std;
 
-int solution(vector<vector<int>> board)
+int solution(vector<int> sticker)
 {
-    unsigned long num_row = board.size();
-    unsigned long num_col = board[0].size();
-    int result = 0;
-    int dp[num_row][num_col];
-    for(int j=0; j<num_col; j++) {
-        dp[0][j] = board[0][j];
+    int num = sticker.size();
+    int dp[num], dp2[num];
+    if(num == 1) {
+        return sticker[0];
+    } else if(num == 2) {
+        return max(sticker[0], sticker[1]);
+    } else if(num == 3) {
+        return max(max(sticker[0], sticker[1]), sticker[2]);
     }
+    //dp는 첫째 놈을 고르지 않았을 때
+    dp[0] = 0;
+    dp[1] = sticker[1];
+    //dp2는 첫째 놈을 골랐을 때
+    dp2[0] = sticker[0];
+    dp2[1] = dp2[0];
+    dp2[num-1] = 0;
+
+    for(int i=2; i<num-1; ++i) {
+        dp[i] = max(dp[i-1], dp[i-2] + sticker[i]);
+        dp2[i] = max(dp2[i-1], dp2[i-2] + sticker[i]);
+    }
+    dp[num-1] =max(dp[num-2], dp[num-3] + sticker[num-1]);
     
-    for(int i=1; i<num_row; i++) {
-        int maximum = 0;
-        for(int j=0; j<num_col; j++) {
-            int a, b, c;
-            a = (j+1) % 4;
-            b = (j+2) % 4;
-            c = (j+3) % 4;
-            maximum = max(max( dp[i-1][a], dp[i-1][b]), dp[i-1][c]);
-            dp[i][j] = maximum + board[i][j];
-        }
-    }
-    for(int j=0; j<num_col; j++) {
-        result = max(result, dp[num_row-1][j]);
-    }
-    
-    return result;
+    return max(dp[num-1], dp2[num-2]);
 }
-//원래 문제는 위에서 내려오는 것이지만 코드 작성의 편의성과 가독성을 위해 올라오는 것으로 문제를 임의로 변경하겠다.
+
 int main(int argc, const char* argv[]) {
-    vector<vector<int>> board = {
-        {1, 3, 5, 7},
-        {2, 4, 6, 8},
-        {3, 2, 4, 1},
-        {1, 3, 4, 2}
-    };
-    cout << solution(board);
-  
+    vector<int> sticker = {5,4,3, 7};
+    
+    cout << solution(sticker);
     return 0;
 }
