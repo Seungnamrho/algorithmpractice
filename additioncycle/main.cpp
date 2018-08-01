@@ -15,29 +15,22 @@ using namespace std;
 
 int solution(vector<string> strs, string t)
 {
-    set<string> str_set(strs.begin(), strs.end());
-    const int INF = 987654321;
-    vector<int> dp(20002, INF);
+    int INF = 987654321;
     int len = t.length();
-
+    vector<int> dp(t.length(), INF);
+    set<string> str_set(strs.begin(), strs.end());
     dp[len] = 0;
-    
-    for(int i=len-1; i>=0; i--) {
-        string tmp = "";
+    for(int i = len-1; i>=0; i--) {
+        string temp = "";
         for(int j=0; j<5 && i+j<len; j++) {
-            tmp += t[i+j];
-            if(str_set.find(tmp) != str_set.end() && dp[i+j+1] != INF) {
+            temp += t[i+j];
+            if(str_set.find(temp) != str_set.end() && dp[i+j+1] != INF) {
                 dp[i] = min(dp[i], dp[i+j+1] + 1);
             }
         }
     }
-    if(dp[0] == INF) {
-        return -1;
-    }else {
-        return dp[0];
-    }
+    return dp[0] == INF ? -1 : dp[0] ;
 }
-
 int main(int argc, const char * argv[]) {
     vector<string> pieces = {"app","ap","p","l","e","ple","pp"};
     string goal = "apple";
