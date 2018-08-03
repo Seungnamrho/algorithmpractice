@@ -1,35 +1,36 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <utility>
-#include <set>
+//#include <algorithm>
+#include <math.h>
+
 
 using namespace std;
 
+int n,m;
+vector<double> v;
 
-int main(int argc, const char * argv[]) {
-    int a, b, res;
-    cin >> a >> b;
-   
-    vector<int> temp;
-    while(a != 0) {
-        temp.push_back(a % 10);
-        a /= 10;
+int binary_search(const vector<int> num, int target) {
+    int left = 0;
+    int len = num.size();
+    int right = len-1;
+    while(left < right) {
+        int mid = (left+right) / 2;
+        if(num[mid] < target) {
+            left = mid+1 ;
+        } else {
+            right = mid;
+        }
     }
-    a = temp[0]*100 + temp[1]*10 + temp[2];
-    temp.clear();
-    
-    while(b != 0) {
-        temp.push_back(b % 10);
-        b /= 10;
+    return left;
+}
+
+int main()
+{
+    vector<int> numbers;
+    for(int i=0; i<10; i++) {
+        numbers.push_back(i);
     }
-    b = temp[0]*100 + temp[1]*10 + temp[2];
-    res = a > b? a : b;
-    cout << res;
-    
-//    vector<int>::reverse_iterator rev_it;
-//    for(rev_it=temp.rbegin(); rev_it!= temp.rend(); rev_it++) {
-//        cout << *rev_it << endl;
-//    }
+    cout << binary_search(numbers, 7);
     
 }
