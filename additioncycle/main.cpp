@@ -1,49 +1,55 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
-#include <map>
-using namespace std;
+#include <iomanip>
+#include <algorithm>
 
-int main() {
-    int case_no;
-    int a, b;
-    int first[101] = {0, };
-    int second[65] = {0, };
-    first[1] = 500;
-    second[1] = 512;
-    for(int i=2; i<4; i++) {
-        first[i] = 300;
+using namespace std;
+double pyuncha(vector<int> k_dolls) {
+    long sum = 0;
+    double avg = 0.0;
+    unsigned long len = k_dolls.size();
+    double diff_sum = 0.0;
+    double result = 0.0;
+    for(int i=0; i<len; i++) {
+        sum += k_dolls[i];
     }
-    for(int i=4; i<7; i++) {
-        first[i] = 200;
+    //이렇게 casting해줄 때 sum+0.00000001해주었는데.. 89%에서 계속 틀리더라. 부동소수점 연산에 대해 더 공부하자.
+    avg = static_cast<double>(sum) /static_cast<double>(len);
+    for(int i=0; i<len; i++) {
+//        diff_sum += (avg-static_cast<double>(k_dolls[i]))*(avg-static_cast<double>(k_dolls[i]));
+        diff_sum += pow(avg-static_cast<double>(k_dolls[i]), 2.0);
     }
-    for(int i=7; i<11; i++) {
-        first[i] = 50;
-    }
-    for(int i=11; i<16; i++) {
-        first[i] = 30;
-    }
-    for(int i=16; i<22; i++) {
-        first[i] = 10;
-    }
-    for(int i=2; i<4; i++) {
-        second[i] = 256;
-    }
-    for(int i=4; i<8; i++) {
-        second[i] = 128;
-    }
-    for(int i=8; i<16; i++) {
-        second[i] = 64;
-    }
-    for(int i=16; i<32; i++) {
-        second[i] = 32;
-    }
-    cin >> case_no;
-   
-    
-    for(int j=0; j<case_no; j++) {
-        cin >> a >> b;
-        cout << (first[a] + second[b])*10000 << endl;
-    }
+    result = sqrt(diff_sum / static_cast<double>(len));
+    return result;
 }
+int main() {
+    //N은 총 인형의 종류, K는 표준편차를 확인하기 위해 뽑을 인형들.
+    int N, K;
+    cin >> N >> K;
+    vector<int> dolls;
+    double answer = INFINITY;
+    int temp;
+    for(int i=0; i<N; i++) {
+        cin >> temp;
+        dolls.push_back(temp);
+    }
+    //practice
+    //이 p때문에 존나 고생함.
+    for(int p=K; p<=N; p++) {
+        for(int i=0; i<=N-p; i++) {
+            vector<int> k_dolls;
+            for(int j=0; j<p; j++) {
+                k_dolls.push_back(dolls[i+j]);
+            }
+            answer = min(answer, pyuncha(k_dolls)+0.00000001);
+        }
+    }
+   
+    cout << fixed <<setprecision(11) << answer << endl;
+}
+
+
+
+
 
