@@ -4,49 +4,67 @@
 #include <iomanip>
 #include <algorithm>
 
+
 using namespace std;
-double pyuncha(vector<int> k_dolls) {
-    long sum = 0;
-    double avg = 0.0;
-    unsigned long len = k_dolls.size();
-    double diff_sum = 0.0;
-    double result = 0.0;
-    for(int i=0; i<len; i++) {
-        sum += k_dolls[i];
+//각각의 체크포인트들이다. x좌표와 y좌표, 그리고 HP와 부스터가 충전된 적이 있는지를 나타내는 불 변수를 가지고 있다.
+struct checkpoint {
+    int x;
+    int y;
+    bool HPcharged = false;
+    bool boostercharged = false;
+};
+
+struct character {
+    int currentX;
+    int currentY;
+    double HP;
+    bool isBoosterAvailable = true;
+};
+int canReach(vector<checkpoint> checkpoints, int from, int to) {
+    //boster 사용해서 reachable한지
+    if(checkpoints[from].x == checkpoints[to].x || checkpoints[from].y == checkpoints[to].y) {
+        return 1;
     }
-    //이렇게 casting해줄 때 sum+0.00000001해주었는데.. 89%에서 계속 틀리더라. 부동소수점 연산에 대해 더 공부하자.
-    avg = static_cast<double>(sum) /static_cast<double>(len);
-    for(int i=0; i<len; i++) {
-//        diff_sum += (avg-static_cast<double>(k_dolls[i]))*(avg-static_cast<double>(k_dolls[i]));
-        diff_sum += pow(avg-static_cast<double>(k_dolls[i]), 2.0);
-    }
-    result = sqrt(diff_sum / static_cast<double>(len));
-    return result;
+    return 0;
 }
 int main() {
-    //N은 총 인형의 종류, K는 표준편차를 확인하기 위해 뽑을 인형들.
-    int N, K;
-    cin >> N >> K;
-    vector<int> dolls;
-    double answer = INFINITY;
-    int temp;
-    for(int i=0; i<N; i++) {
-        cin >> temp;
-        dolls.push_back(temp);
+    //N은 총 체크포인트의 수, Q는 질의의 수
+    int N, Q;
+    cin >> N >> Q;
+    int tempx, tempy;
+    int startCP, endCP, X;
+    bool dp_table[N+1][N+1];
+    //checkpoint checkpoints[N+1];
+    vector<checkpoint> checkpoints(N+1);
+    //0번째 checkpoint는 무한대로 초기화 -> 없는 걸로 만든다.
+    checkpoints[0].x = INFINITY;
+    checkpoints[0].y = INFINITY;
+    
+    //checkpoint들을 다 초기화한다.
+    for(int i=1; i<=N; i++) {
+        cin >> tempx >> tempy;
+        checkpoints[i].x = tempx;
+        checkpoints[i].y = tempy;
     }
-    //practice
-    //이 p때문에 존나 고생함.
-    for(int p=K; p<=N; p++) {
-        for(int i=0; i<=N-p; i++) {
-            vector<int> k_dolls;
-            for(int j=0; j<p; j++) {
-                k_dolls.push_back(dolls[i+j]);
+    
+    //각각의 case들.
+    for(int i=0; i<Q; i++) {
+        //예시 input.. startCP ->1 endCP ->5 X->0
+        cin >> startCP >> endCP >> X;
+        character seungnam;
+        //직접 부스터로 이동 가능한지
+        
+        for(int j=1; j<N+1; j++) {
+            for(int k=1; k<N+1; k++) {
+                dp_table[j][k] = canReach(checkpoints, j, k);
             }
-            answer = min(answer, pyuncha(k_dolls)+0.00000001);
         }
+        //seungnam은 지금 체크포인트 1인 1,2에 있고 HP는 0이다. 체크포인트 5인 3, 9로 가야만 한다.
+        //(1, 2) (3, 2) (4, 4) (6, 2) (3, 9) 이다 차례로.
+        seungnam.currentX = checkpoints[startCP].x;
+        seungnam.currentY = checkpoints[startCP].y;
+        seungnam.HP = X;
     }
-   
-    cout << fixed <<setprecision(11) << answer << endl;
 }
 
 
