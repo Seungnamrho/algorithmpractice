@@ -1,36 +1,49 @@
 #include <iostream>
 #include <vector>
-#include <string>
-//#include <algorithm>
 #include <math.h>
-
-
+#include <map>
 using namespace std;
 
-int n,m;
-vector<double> v;
-
-int binary_search(const vector<int> num, int target) {
-    int left = 0;
-    int len = num.size();
-    int right = len-1;
-    while(left < right) {
-        int mid = (left+right) / 2;
-        if(num[mid] < target) {
-            left = mid+1 ;
-        } else {
-            right = mid;
-        }
+int main() {
+    int case_no;
+    int a, b;
+    int first[101] = {0, };
+    int second[65] = {0, };
+    first[1] = 500;
+    second[1] = 512;
+    for(int i=2; i<4; i++) {
+        first[i] = 300;
     }
-    return left;
-}
-
-int main()
-{
-    vector<int> numbers;
-    for(int i=0; i<10; i++) {
-        numbers.push_back(i);
+    for(int i=4; i<7; i++) {
+        first[i] = 200;
     }
-    cout << binary_search(numbers, 7);
+    for(int i=7; i<11; i++) {
+        first[i] = 50;
+    }
+    for(int i=11; i<16; i++) {
+        first[i] = 30;
+    }
+    for(int i=16; i<22; i++) {
+        first[i] = 10;
+    }
+    for(int i=2; i<4; i++) {
+        second[i] = 256;
+    }
+    for(int i=4; i<8; i++) {
+        second[i] = 128;
+    }
+    for(int i=8; i<16; i++) {
+        second[i] = 64;
+    }
+    for(int i=16; i<32; i++) {
+        second[i] = 32;
+    }
+    cin >> case_no;
+   
     
+    for(int j=0; j<case_no; j++) {
+        cin >> a >> b;
+        cout << (first[a] + second[b])*10000 << endl;
+    }
 }
+
