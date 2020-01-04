@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C6556D0223BF1FF000FE670A /* 1909_1_1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6556CFF23BF126900FE670A /* 1909_1_1.cpp */; };
+		C6556D0A23BF39B200FE670A /* 1909_1_3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6556D0923BF39B200FE670A /* 1909_1_3.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +26,9 @@
 		C6556CF523BF122B00FE670A /* algorithm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = algorithm; path = /Users/samrho/Desktop/organized/development/algorithmpractice/algorithm/build/Debug/algorithm; sourceTree = "<absolute>"; };
 		C6556CFF23BF126900FE670A /* 1909_1_1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = 1909_1_1.cpp; sourceTree = "<group>"; };
 		C6556D0123BF12B600FE670A /* hello.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = hello.md; sourceTree = "<group>"; };
+		C6556D0423BF309600FE670A /* 1909_1_2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = 1909_1_2.cpp; sourceTree = "<group>"; };
+		C6556D0723BF37D600FE670A /* 1909_1_2_better.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = 1909_1_2_better.cpp; sourceTree = "<group>"; };
+		C6556D0923BF39B200FE670A /* 1909_1_3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = 1909_1_3.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +45,10 @@
 		C6556CEC23BF122B00FE670A = {
 			isa = PBXGroup;
 			children = (
+				C6556D0923BF39B200FE670A /* 1909_1_3.cpp */,
+				C6556D0723BF37D600FE670A /* 1909_1_2_better.cpp */,
+				C6556D0623BF321B00FE670A /* solutions */,
+				C6556D0423BF309600FE670A /* 1909_1_2.cpp */,
 				C6556D0323BF255A00FE670A /* personal */,
 				C6556CFF23BF126900FE670A /* 1909_1_1.cpp */,
 				C6556D0123BF12B600FE670A /* hello.md */,
@@ -53,6 +60,13 @@
 			children = (
 			);
 			path = personal;
+			sourceTree = "<group>";
+		};
+		C6556D0623BF321B00FE670A /* solutions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = solutions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,7 +126,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6556D0223BF1FF000FE670A /* 1909_1_1.cpp in Sources */,
+				C6556D0A23BF39B200FE670A /* 1909_1_3.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
