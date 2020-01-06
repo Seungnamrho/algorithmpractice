@@ -2,7 +2,7 @@
 //  main.cpp
 //  algorithm
 //
-//  Created by Sam Rho on 2020/01/03.
+//  Created by Sam Rho on 2020/01/06.
 //  Copyright © 2020 Sam Rho. All rights reserved.
 //
 
