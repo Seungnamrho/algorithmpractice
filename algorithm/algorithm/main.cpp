@@ -1,34 +1,33 @@
-/*
- 
- 10 11 0 0 0 0 0 0 0 0 0
- 0 11 10 0 0 0 0 0 0 0 0
- 0 3 20 7 0 1 0 0 0 0 0
- 3 0 0 9 8 0 0 0 0 0 0
- 0 0 0 17 2 15 0 0 0 0 0
- 0 0 13 11 0 19 2 0 0 0 0
- 2 1 5 4 0 0 0 0 0 0 10
- 0 0 0 0 0 0 15 14 0 0 0
- 0 0 0 0 0 0 0 0 3 7 2
- 0 0 0 0 0 0 9 4 1 10 15
- 0 0 0 0 10 1 0 5 19 7 0
- 
- **/
 #include <iostream>
-#include <stack>
-#define SIZE 11
+#include <string>
+#include <vector>
+
 using namespace std;
 
-int main(int argc, const char * argv[]) {
-    stack<int> st;
-    int arr[SIZE][SIZE];
-    for (int i = 0; i < SIZE; ++i) {
-        for (int j = 0; j < SIZE; ++j) {
-            cin >> arr[i][j];
+vector<int> solution(vector<int> arr, vector<vector<int>> commands) {
+    vector<int> solution(commands.size(), -1);
+    for (int i = 0; i < commands.size(); ++i) {
+        int from = commands[i][0];
+        int to = commands[i][1];
+        int K = commands[i][2];
+        vector<int> newVec(arr.begin() + from - 1, arr.begin() + to);
+        sort(newVec.begin(), newVec.end());
+        for (int j = 0 ; j < newVec.size(); ++j) {
+            cout << newVec[j] << endl;
         }
-    }
-    
-    while (!st.empty()) {
+        cout << "K: " << K << '\n';
+        solution[i] = newVec[K - 1];
         
     }
-    
+    for (int i = 0 ; i < solution.size(); ++i) {
+        cout << solution[i] << endl;
+    }
+    return {};
+}
+
+int main () {
+    vector<int> arr = {1, 5, 2, 6, 3, 7, 4};
+    vector<vector<int> > commands = {{2, 5, 3}, {4, 4, 1}, {1, 7, 3}};
+     solution(arr, commands);
+    return 0;
 }
