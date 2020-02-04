@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-\
+
 long long  getDistance(pair<int, int> pointA, pair<int, int> pointB );
 int main(int argc, const char * argv[]) {
     // N은 사람의 수

@@ -1,11 +1,3 @@
-//
-//  main.cpp
-//  algorithm
-//
-//  Created by Sam Rho on 2020/01/03.
-//  Copyright © 2020 Sam Rho. All rights reserved.
-//
-
 #include <iostream>
 #include <vector>
 #include <set>
